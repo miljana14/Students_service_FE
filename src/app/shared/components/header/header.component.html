@@ -1,0 +1,121 @@
+<div class="overlay" *ngIf="showSettingsMenu || showMenu"></div>
+<div ngbNav #nav="ngbNav" class="app-nav-bar" [ngClass]="{'d-flex align-items-center': !showMenu}">
+  <button *ngIf="userLoginData.isUserLogged" class="navbar-toggler" style="color: #0d6efd;" type="button"
+    (click)="toggleMenu()">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <div ngbDropdown *ngIf="showMenu" class="settings-dropdown-right">
+    <div class="card">
+      <button class="card-button" (click)="hideMenu()">X</button>
+      <div class="card-header">
+        <h5 class="card-title mb-0">{{'APP_TITLE' | translate}}</h5>
+      </div>
+
+      <div *ngIf="userAuthority==='ROLE_ADMIN'" class="list-group list-group-flush" role="tablist">
+        <a class="list-group-item list-group-item-action" routerLink="/home/home" (click)="hideMenu()">{{'HOME.TITLE' | translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/student/student-list" (click)="hideMenu()">{{'STUDENT.TITLE' |
+          translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/professor/professor-list" (click)="hideMenu()">{{'PROFESSOR.TITLE' |
+          translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/subject" (click)="hideMenu()">{{'PROFESSOR.SUBJECTS' | translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/exam" (click)="hideMenu()">{{'EXAM.TITLE' | translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/examination-period" (click)="hideMenu()">{{'EXAMINATION_PERIOD.TITLE'
+          | translate}}</a>
+      </div>
+
+      <div *ngIf="userAuthority==='ROLE_PROFESSOR'" class="list-group list-group-flush" role="tablist">
+        <a class="list-group-item list-group-item-action" routerLink="/home/home-professor" (click)="hideMenu()">{{'HOME.TITLE' |
+          translate}}</a>
+        <a class="list-group-item list-group-item-action"
+          routerLink="/professor/professor-subjects-list" (click)="hideMenu()">{{'SUBJECT.TITLE_PLURAL' | translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/exam" (click)="hideMenu()">{{'EXAM.TITLE' | translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/mark/professor-exam-list" (click)="hideMenu()">{{'MARK.ADD_MARKS' |
+          translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/examination-period" (click)="hideMenu()">{{'EXAMINATION_PERIOD.TITLE'
+          | translate}}</a>
+      </div>
+
+      <div *ngIf="userAuthority==='ROLE_STUDENT'" class="list-group list-group-flush" role="tablist">
+        <a class="list-group-item list-group-item-action" routerLink="/home/home-student" (click)="hideMenu()">{{'HOME.TITLE' |
+          translate}}</a>
+        <a class="list-group-item list-group-item-action"
+          routerLink="/exam/available-exam-list" (click)="hideMenu()">{{'EXAM.AVAILABLE_EXAMS' | translate}}</a>
+        <a class="list-group-item list-group-item-action" routerLink="/mark/mark-list" (click)="hideMenu()">{{'EXAM.EXAMS' | translate}}</a>
+        <a class="list-group-item list-group-item-action"
+          routerLink="/student/student-subjects" (click)="hideMenu()">{{'SUBJECT.TITLE_PLURAL' | translate}}</a>
+      </div>
+
+    </div>
+
+  </div>
+  <div [ngClass]="{ 'static-menu': userLoginData.isUserLogged }">
+    <ul class="navbar-nav">
+      <li ngbNavItem>
+        <div ngbDropdown class="d-inline-block mx-2">
+          <a ngbNavLink ngbDropdownToggle id="dropdownLanguages">{{currentLanguage}}</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownLanguages">
+            <button ngbDropdownItem (click)="onLanguageChange('en')">En</button>
+            <button ngbDropdownItem (click)="onLanguageChange('sr')">Sr</button>
+          </div>
+        </div>
+
+        <div ngbDropdown class="d-inline-block mx-2" *ngIf="userLoginData.isUserLogged">
+          <a ngbNavLink ngbDropdownToggle id="dropdownUser">{{userLoginData.userLoginData?.firstname}}</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownUser">
+            <button *ngIf="userAuthority!=='ROLE_ADMIN'" class="set" ngbDropdownItem ngbDropdownToggle
+              (click)="toggleSettingsMenu()">
+              <bi name="gear"></bi>{{ 'SETTINGS' | translate}}
+            </button>
+
+            <button ngbDropdownItem (click)="logout()">{{ 'LOGOUT' | translate}}</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div ngbDropdown *ngIf="showSettingsMenu" class="settings-dropdown">
+
+  <div class="card">
+    <button class="card-button" (click)="hideSettingsMenu()">X</button>
+    <div class="card-header">
+      <h5 *ngIf="userAuthority==='ROLE_STUDENT'" class="card-title mb-0">{{student?.firstName}} {{student?.lastName}}
+      </h5>
+      <h5 *ngIf="userAuthority==='ROLE_PROFESSOR'" class="card-title mb-0">{{professor?.firstName}}
+        {{professor?.lastName}}</h5>
+    </div>
+
+    <div *ngIf="userAuthority==='ROLE_STUDENT'" class="list-group list-group-flush" role="tablist">
+      <a class="list-group-item list-group-item-action"
+        [routerLink]="['/student/student-details', this.student?.indexNumber, this.student?.indexYear]" (click)="hideSettingsMenu()">
+        {{ 'COMMON.DETAILS' | translate}}
+      </a>
+      <a class="list-group-item list-group-item-action"
+        [routerLink]="['/student/student-form', this.student?.indexNumber, this.student?.indexYear]" (click)="hideSettingsMenu()">
+        {{ 'COMMON.EDIT_PROFILE' | translate}}
+      </a>
+      <a class="list-group-item list-group-item-action"
+        [routerLink]="['/student/change-student-password', this.student?.indexNumber, this.student?.indexYear]"
+        (click)="hideSettingsMenu()">
+        {{ 'CHANGE_PASSWORD.CHANGE_PASSWORD' | translate}}
+      </a>
+    </div>
+
+    <div *ngIf="userAuthority==='ROLE_PROFESSOR'" class="list-group list-group-flush" role="tablist">
+      <a class="list-group-item list-group-item-action"
+        [routerLink]="['/professor/professor-details', this.professor?.id]" (click)="hideSettingsMenu()">
+        {{ 'COMMON.DETAILS' | translate}}
+      </a>
+      <a class="list-group-item list-group-item-action" [routerLink]="['/professor/professor-form', this.professor?.id]" (click)="hideSettingsMenu()">
+        {{ 'COMMON.EDIT_PROFILE' | translate}}
+      </a>
+      <a class="list-group-item list-group-item-action" 
+        [routerLink]="['/professor/change-professor-password', this.professor?.id]"  (click)="hideSettingsMenu()">
+        {{ 'CHANGE_PASSWORD.CHANGE_PASSWORD' | translate}}
+      </a>
+    </div>
+
+  </div>
+</div>

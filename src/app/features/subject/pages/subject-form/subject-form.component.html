@@ -1,0 +1,77 @@
+<form [formGroup]="subjectForm" *ngIf="subjectForm" (ngSubmit)="onSave()">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+      <div class="from-group">
+        <label for="name">{{'SUBJECT.NAME' | translate }}</label>
+        <input id="name" class="form-control" placeholder="{{'SUBJECT.NAME' | translate }}"  type="text" formControlName="name"/>
+        <div class="alert alert-danger" *ngIf="hasErrors('name')">
+          <span *ngIf="hasErrors('name','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('name','minlength')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MIN_LENGTH' | translate: {minlength:subjectForm.get('name')?.errors!['minlength']['minlength']}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="description">{{'SUBJECT.DESCRIPTION' | translate }}</label>
+        <input id="description" class="form-control" placeholder="{{'SUBJECT.DESCRIPTION' | translate }}"  type="text" formControlName="description" />
+      </div>
+
+      <div class="from-group">
+        <label for="noOfESP">{{'SUBJECT.NO_OF_ESP' | translate }}</label>
+        <input id="noOfESP" class="form-control" placeholder="{{'SUBJECT.NO_OF_ESP' | translate }}"  type="text" formControlName="noOfESP" />
+        <div class="alert alert-danger" *ngIf="hasErrors('noOfESP')">
+          <span *ngIf="hasErrors('noOfESP','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="yearOfStudy">{{'SUBJECT.YEAR_OF_STUDY' | translate }}</label>
+        <input id="yearOfStudy" class="form-control" placeholder="{{'SUBJECT.YEAR_OF_STUDY' | translate }}"  type="text" formControlName="yearOfStudy" />
+        <div class="alert alert-danger" *ngIf="hasErrors('yearOfStudy')">
+          <span *ngIf="hasErrors('yearOfStudy','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('yearOfStudy','min')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MIN_YEAR' | translate: {min:subjectForm.get('yearOfStudy')?.errors!['min']['min']}  }}</small>
+          </span>
+          <span *ngIf="hasErrors('yearOfStudy','max')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MAX_YEAR' | translate: {max:subjectForm.get('yearOfStudy')?.errors!['max']['max']}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="semester">{{'SUBJECT.SEMESTER' | translate }}</label>
+        <select
+            type="text"
+            id="semester" class="form-select"
+            formControlName="semester"
+          >
+            <option *ngFor="let semester of semesters | keyvalue" [ngValue]="semester.value">
+              {{ semester.value }}
+            </option>
+          </select>
+          <div class="alert alert-danger" *ngIf="hasErrors('semester')">
+            <span *ngIf="hasErrors('semester','required')" >
+              <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+            </span>
+          </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-2">
+        <button type="button" class="mx-1 btn  btn-outline-primary" (click)="onSave()">{{'COMMON.SAVE' | translate }}</button>
+        <button class="mx-1 btn  btn-outline-danger" [routerLink]="['../subject-list']" queryParamsHandling="preserve" >{{'COMMON.CANCEL' | translate }}</button>
+      </div>
+    </div>
+
+
+    </div>
+
+</form>

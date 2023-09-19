@@ -1,0 +1,85 @@
+<form [formGroup]="examinationPeriodForm" *ngIf="examinationPeriodForm">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+      <div class="from-group">
+        <label for="name">{{'EXAMINATION_PERIOD.NAME' | translate }}</label>
+        <input id="name" class="form-control" placeholder="{{'EXAMINATION_PERIOD.NAME' | translate }}" type="text"
+          formControlName="name" />
+        <div class="alert alert-danger" *ngIf="hasErrors('name')">
+          <span *ngIf="hasErrors('name','required')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('name', 'unavailable')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.UNIQUE_NAME' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="beginDate">{{'EXAMINATION_PERIOD.BEGIN_DATE' | translate }}</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="{{ 'EXAMINATION_PERIOD.BEGIN_DATE' | translate }}"
+            formControlName="beginDate" ngbDatepicker #dp="ngbDatepicker">
+          <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button"><i class="fa fa-calendar"
+              aria-hidden="true"></i></button>
+        </div>
+        <div class="alert alert-danger" *ngIf="hasErrors('beginDate')">
+          <span *ngIf="hasErrors('beginDate','required')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="endDate">{{'EXAMINATION_PERIOD.END_DATE' | translate }}</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="{{ 'EXAMINATION_PERIOD.END_DATE' | translate }}"
+            formControlName="endDate" ngbDatepicker #dp2="ngbDatepicker">
+          <button class="btn btn-outline-secondary" (click)="dp2.toggle()" type="button"><i class="fa fa-calendar"
+              aria-hidden="true"></i></button>
+        </div>
+        <div class="alert alert-danger" *ngIf="hasErrors('endDate')">
+          <span *ngIf="hasErrors('endDate','required')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('endDate', 'overlappingDates')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.OVERLAP' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('endDate', 'orderDates')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.BEGIN_BEFORE_END_DATE' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="active">{{'EXAMINATION_PERIOD.ACTIVE' | translate }}</label>
+        <select type="text" id="active" class="form-select" formControlName="active">
+          <option *ngFor="let active of actives | keyvalue" [ngValue]="active.key === 'TRUE'">
+            {{ active.value }}
+          </option>
+        </select>
+        <div class="alert alert-danger" *ngIf="hasErrors('active')">
+          <span *ngIf="hasErrors('active','required')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between mt-2">
+        <div>
+          <button *ngIf="mode !== 'EDIT'" type="button" class="btn btn-success" (click)="onClone()">{{'COMMON.CLONE' |
+            translate }}</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-outline-primary" (click)="onSave()">{{'COMMON.SAVE' | translate
+            }}</button>
+          <button class="btn btn-outline-danger" [routerLink]="['../examination-period-list']"
+            queryParamsHandling="preserve">{{'COMMON.CANCEL' | translate }}</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</form>

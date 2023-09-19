@@ -1,0 +1,14 @@
+<div class="toast-container">
+
+  <ngb-toast *ngFor="let toast of toasts; let i = index"
+  [class]="toast.className"
+  [autohide]="true"
+  [header]="toast.header"
+  [delay]="toast.delay || 3000"
+  (hidden)="removeToast(i)">
+
+{{toast.message}}
+
+  </ngb-toast>
+
+</div>

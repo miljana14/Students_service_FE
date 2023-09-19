@@ -1,0 +1,110 @@
+<form [formGroup]="examForm" *ngIf="examForm" (ngSubmit)="onSave()">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+      <div class="from-group" formGroupName="examinationPeriod">
+        <label for="examinationPeriod">{{'EXAM.EXAMINATION_PERIOD' | translate }}</label>
+        <select (change)='availableDates()'
+            type="text"
+            id="examinationPeriod" class="form-select"
+            formControlName="id"
+          >
+            <option *ngFor="let examinationPeriod of examinationPeriods" [ngValue]="examinationPeriod.id">
+              {{ examinationPeriod.name }}
+            </option>
+          </select>
+          <div class="alert alert-danger" *ngIf="hasErrors('examinationPeriod')">
+            <span *ngIf="hasErrors('examinationPeriod','required')" >
+              <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+            </span>
+          </div>
+      </div>
+
+      <div class="from-group" formGroupName="subject">
+        <label for="subject">{{'EXAM.SUBJECT' | translate }}</label>
+        <select (change)="availableProfessors()"
+            type="text"
+            id="subject" class="form-select"
+            formControlName="id"
+          >
+            <option *ngFor="let subject of subjects" [ngValue]="subject.id">
+              {{ subject.name }}
+            </option>
+          </select>
+          <div class="alert alert-danger" *ngIf="hasErrors('subject')">
+            <span *ngIf="hasErrors('subject','required')" >
+              <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+            </span>
+            <span *ngIf="hasErrors('subject','subjectHasExamInSelectedPeriod')" >
+              <small>{{'COMMON.VALIDATION_MESSAGES.EXAM_EXISTS' | translate}}</small>
+            </span>
+          </div>
+      </div>
+
+      <div class="from-group" formGroupName="professor">
+        <label for="professor">{{'EXAM.PROFESSOR' | translate }}</label>
+        <select
+            type="text"
+            id="professor" class="form-select"
+            formControlName="id"
+          >
+            <option *ngFor="let professor of professors" [ngValue]="professor.id">
+              {{ professor.firstName }} {{ professor.lastName }}
+            </option>
+          </select>
+          <div class="alert alert-danger" *ngIf="hasErrors('professor')">
+            <span *ngIf="hasErrors('professor','required')" >
+              <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+            </span>
+          </div>
+      </div>
+
+      <!-- <div class="from-group">
+        <label for="examDate">{{'EXAM.EXAM_DATE' | translate }}</label>
+
+        <select
+            type="text"
+            id="examDate" class="form-select"
+            formControlName="examDate"
+          >
+            <option *ngFor="let examDate of dates" [ngValue]="examDate">
+              {{ examDate }}
+            </option>
+          </select>
+            </div>
+        
+          <div class="alert alert-danger" *ngIf="hasErrors('examDate')">
+            <span *ngIf="hasErrors('examDate','required')" >
+              <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+            </span>
+          </div>
+      </div> -->
+
+      <div class="from-group">
+        <label for="examDate">{{ 'EXAM.EXAM_DATE' | translate }}</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="{{ 'EXAM.EXAM_DATE' | translate }}" formControlName="examDate" ngbDatepicker #dp="ngbDatepicker"  [minDate]="getMinDate()"
+          [maxDate]="getMaxDate()">
+          <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+        <div class="alert alert-danger" *ngIf="hasErrors('examDate')">
+          <span *ngIf="hasErrors('examDate', 'required')">
+            <small>{{ 'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate }}</small>
+          </span>
+        </div>
+    </div>
+
+
+      <div class="d-flex justify-content-end mt-2">
+        <button type="button" class="btn btn-outline-primary" (click)="onSave()">{{'COMMON.SAVE' | translate }}</button>
+        <button class="btn btn-outline-danger" [routerLink]="['../exam-list']" queryParamsHandling="preserve" >{{'COMMON.CANCEL' | translate }}</button>
+      </div>
+    </div>
+
+
+    </div>
+
+</form>
+
+

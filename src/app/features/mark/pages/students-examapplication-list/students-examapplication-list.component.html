@@ -1,0 +1,39 @@
+<h3 class="d-flex justify-content-center" style="color: #0d6efd;">{{this.exam.subject.name}}</h3>
+
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="px-3" sortable="indexNumber" scope="col">{{ 'STUDENT.INDEX_NUMBER' | translate }}</th>
+        <th class="px-3" sortable="indexYear">{{ 'STUDENT.INDEX_YEAR' | translate }}</th>
+        <th class="px-3" sortable="firstName">{{ 'STUDENT.FIRST_NAME' | translate }}</th>
+        <th class="px-3" sortable="lastName">{{ 'STUDENT.LAST_NAME' | translate }}</th>
+        <th class="px-3" sortable="currentYearOfStudy">{{ 'STUDENT.CURRENT_YEAR' | translate }}</th>
+        <th class="px-3">{{ 'COMMON.INSERT_MARK' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students; let i = index">
+        <td>{{student.indexNumber}}</td>
+        <td>{{student.indexYear}}</td>
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td>{{student.currentYearOfStudy}}</td>
+        <td>
+          <select class="form-select" [value]="getMark(student)" (change)="setMark(student, $event)" name="mark"
+            [disabled]="isStudentDisabled(student)">
+            <option value="0">0</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<button class="btn btn-primary" (click)="saveMarks()">{{ 'COMMON.INSERT_MARK' | translate }}</button>

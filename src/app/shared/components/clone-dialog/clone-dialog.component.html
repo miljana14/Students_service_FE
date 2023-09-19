@@ -1,0 +1,59 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">{{ headerText }}</h4>
+    <button type="button" class="close" (click)="modal.dismiss('Close')">
+        <span>&times;</span>
+    </button>
+
+</div>
+<div class="modal-body">
+    <p [innerHTML]="message"></p>
+    <form [formGroup]="examinationPeriodForm" *ngIf="examinationPeriodForm">
+
+        <div class="from-group">
+            <select type="text" id="examinationPeriod" class="form-select" formControlName="name"
+                (change)="handleExaminationPeriodChange($event)">
+                <option *ngFor="let examinationPeriod of examinationPeriods" [ngValue]="examinationPeriod.name">
+                    {{ examinationPeriod.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="from-group">
+            <label for="newName">{{'EXAMINATION_PERIOD.NAME' | translate }}</label>
+            <input id="newName" class="form-control" placeholder="{{'EXAMINATION_PERIOD.NAME' | translate }}"
+                type="text" formControlName="newName" />
+            <div class="alert alert-danger" *ngIf="hasErrors('newName')">
+                <span *ngIf="hasErrors('newName','required')">
+                    <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+                </span>
+                <span *ngIf="hasErrors('newName', 'unavailable')">
+                    <small>{{'COMMON.VALIDATION_MESSAGES.UNIQUE_NAME' | translate}}</small>
+                </span>
+            </div>
+        </div>
+
+        <div class="from-group">
+            <label for="beginDate">{{'EXAMINATION_PERIOD.BEGIN_DATE' | translate }}</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="{{ 'EXAMINATION_PERIOD.BEGIN_DATE' | translate }}"
+                    formControlName="beginDate" ngbDatepicker #dp="ngbDatepicker">
+                <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button"><i class="fa fa-calendar"
+                        aria-hidden="true"></i></button>
+            </div>
+            <div class="alert alert-danger" *ngIf="hasErrors('beginDate')">
+                <span *ngIf="hasErrors('beginDate','required')">
+                  <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+                </span>
+                <span *ngIf="hasErrors('beginDate', 'overlappingDates')">
+                  <small>{{'COMMON.VALIDATION_MESSAGES.OVERLAP' | translate}}</small>
+                </span>
+              </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="onConfirm()">Yes</button>
+</div>

@@ -1,0 +1,120 @@
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'PROFESSOR.TITLE_DETAILS' | translate}}</h3>
+
+
+<form class="m-3" [formGroup]="professorForm" *ngIf="professorForm">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.FIRST_NAME' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="firstName"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.LAST_NAME' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="lastName"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.EMAIL' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="email"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.ADDRESS' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="address"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.POSTAL_CODE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="postalCode"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.PHONE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="phone"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.REELECTION_DATE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="reelectionDate"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'PROFESSOR.PROFESSOR_TITLE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="title"
+      />
+    </div>
+
+    
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.USERNAME' | translate }}</span>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="username"
+      />
+    </div>
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.PASSWORD' | translate }}</span>
+      <input
+        type="password"
+        class="form-control"
+        formControlName="password"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column" *ngIf="userAuthority === 'ROLE_ADMIN'">
+      <span class="badge bg-primary">{{ 'PROFESSOR.SUBJECTS' | translate }}</span>
+
+          <div *ngFor="let subject of subjects" class="py-0">
+            <p class="form-control p d-flex justify-content-between">{{ subject.name }}<button class="btn  btn-sm border"  (click)=" onDeleteSubject(subject)" >X</button></p>
+            
+          </div>
+
+    </div>
+    <div class="d-flex justify-content-end mt-2" *ngIf="userAuthority === 'ROLE_ADMIN'">
+
+      <button class="mx-1 btn btn-outline-primary" [routerLink]="['../../professor-form',id]">{{ 'COMMON.EDIT' | translate }}</button>
+      <button type="button" class=" mx-1 btn btn-outline-danger" (click)="onDelete()">{{ 'COMMON.DELETE' | translate }}</button>
+      <button class="mx-1 btn btn-outline-primary" [routerLink]="['../../change-professor-password',id]">{{ 'CHANGE_PASSWORD.CHANGE_PASSWORD' | translate }}</button>
+      <a class="mx-1 btn btn-primary" routerLink="add-subject">Add subject</a>
+    </div>
+    <router-outlet *ngIf="userAuthority === 'ROLE_ADMIN'"></router-outlet>
+  </div>
+  </div>
+
+</form>

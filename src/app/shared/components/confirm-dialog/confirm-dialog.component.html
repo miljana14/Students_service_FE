@@ -1,0 +1,15 @@
+<div class="modal-header">
+
+  <h4 class="modal-title">{{ headerText }}</h4>
+  <button type="button" class="close" (click)="modal.dismiss('Close')">
+    <span>&times;</span>
+  </button>
+
+</div>
+<div class="modal-body">
+  <p [innerHTML]="message"></p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="onConfirm()">Yes</button>
+</div>

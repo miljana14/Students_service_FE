@@ -1,0 +1,82 @@
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'EXAMINATION_PERIOD.TITLE_DETAILS' | translate}}</h3>
+
+
+<form class="m-3" [formGroup]="epForm" *ngIf="epForm">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{'EXAMINATION_PERIOD.NAME' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="name"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{'EXAMINATION_PERIOD.BEGIN_DATE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="beginDate"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{'EXAMINATION_PERIOD.END_DATE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="endDate"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{'EXAMINATION_PERIOD.ACTIVE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="active"
+      />
+    </div>
+
+
+    
+
+  </div>
+  </div>
+
+</form>
+
+<div class="m-3">
+<div class="row justify-content-center">
+
+  <div class="col-md-8 col-lg-6">
+
+<div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{'EXAM.TITLE_PLURAL' | translate }}</span>
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th sortable="examinationPeriod" (sort)="onSort($event)" scope="col">{{ 'EXAM.EXAMINATION_PERIOD' | translate }}</th>
+        <th sortable="subject" (sort)="onSort($event)" scope="col">{{ 'EXAM.SUBJECT' | translate }}</th>
+        <th sortable="professor" (sort)="onSort($event)" scope="col">{{ 'EXAM.PROFESSOR' | translate }}</th>
+        <th sortable="examDate" (sort)="onSort($event)" scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of exams; let i = index" >
+        <td>{{exam.examinationPeriod.name}}</td>
+        <td>{{exam.subject.name}}</td>
+        <td>{{exam.professor.firstName }} {{exam.professor.lastName}}</td>
+        <td>{{exam.examDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>

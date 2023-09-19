@@ -1,0 +1,6 @@
+.toast-container{
+  /* position: fixed;  //pozicionira se u odnosu na browser */
+   position: absolute; /* pozicionira se u odnosu na prvi relative element */
+  top: 3rem;
+  right: 1rem;
+}

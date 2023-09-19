@@ -1,0 +1,29 @@
+
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'EXAM.EXAMS' | translate}}</h3>
+
+<div class="d-flex" style="padding-right: 10px;">
+  <div class="input-group " style="width: 40%; margin-left: auto;">
+    <input type="search" [(ngModel)]="keyword" name="search" placeholder="{{'COMMON.SEARCH' | translate}}" class="form-control"/>
+  </div>
+</div>
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'EXAM.SUBJECT' | translate }}</th>
+        <th scope="col">{{ 'EXAM.EXAMINATION_PERIOD' | translate }}</th>
+        <th scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+        <th scope="col">{{ 'EXAM.MARK' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mark of filterMarks; let i = index" >
+        <td>{{mark.exam.subject.name}}</td>
+        <td>{{mark.exam.examinationPeriod.name}}</td>
+        <td>{{mark.exam.examDate}}</td>
+        <td *ngIf="mark.mark === 0">{{ 'EXAM.GAVE_UP' | translate }}</td>
+        <td *ngIf="mark.mark !== 0">{{mark.mark}}</td>
+      </tr>
+    </tbody>  
+  </table>
+  </div>

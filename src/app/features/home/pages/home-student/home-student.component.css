@@ -1,0 +1,29 @@
+.masthead {
+    position: relative;
+    background-image: url("/assets/images/programming.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    display: flex;
+    align-items: center; 
+    height: 300px;
+  }
+
+  .masthead::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 134, 210, 0.6); 
+    opacity: 1;
+    pointer-events: none; 
+  }
+
+  .text-white {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    color: white; 
+  }

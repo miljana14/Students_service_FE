@@ -1,0 +1,112 @@
+<div class="masthead">
+    <div class="container c position-relative">
+        <div class="row justify-content-center">
+            <div class="text-center text-white">
+                <h1 class="mb-5">{{ 'HOME.OTHER_TITLE' | translate}}</h1>          
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<div class="features-icons bg-light text-center mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                    <h3>{{'EXAMINATION_PERIOD.BEST_EXAM' | translate}}</h3>
+                    <div *ngIf="subjectWithMaxMark">
+                      <p class="lead mb-0">{{ subjectWithMaxMark.name }} - {{ maxMark }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                    <h3>{{'EXAMINATION_PERIOD.CURRENT_DATE' | translate}}</h3>
+                    <p class="lead mb-0">{{ currentDate | date:'dd.MM.yyyy' }}</p>
+                    <p class="lead mb-0">{{ currentDate | date:'HH:mm:ss' }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div *ngIf="examinationPeriod" class="features-icons-item mx-auto mb-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                    <h3>{{'EXAMINATION_PERIOD.ACTIVE_TITLE' | translate}}</h3>
+                    <p class="lead mb-0"><i><b>{{examinationPeriod?.name}}</b></i></p>
+                    <p class="lead mb-0">{{ 'HOME.FIRST_DAY' | translate }} : {{examinationPeriod?.beginDate | date:'dd.MM.yyyy'}}</p>
+                    <p class="lead mb-0">{{ 'HOME.LAST_DAY' | translate}} : {{examinationPeriod?.endDate | date:'dd.MM.yyyy'}}</p>
+                </div>
+                <div *ngIf="!examinationPeriod" class="features-icons-item mx-auto mb-0 mb-lg-3">
+                    <h3>{{'EXAMINATION_PERIOD.ACTIVE_TITLE' | translate}}</h3>
+                    <p class="lead mb-0">{{ 'EXAMINATION_PERIOD.NO_ACTIVE' | translate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div *ngIf="examinationPeriod" class="container pt-3">
+    <div class="row justify-content-center">
+    <div class="card mb-3" style="max-width: 400px;">
+      <div class="card-header bg-primary text-white">
+        <h3 class="card-title">{{ 'COMMON.EVENTS' | translate}}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xs-12 col-md-4">
+            <div class="card date-block text-center p-3" >
+              <div class="card-header month-short bg-primary text-white">{{monthNameFirstDay | slice:0:3 }}</div>
+              <div class="day-number">{{ (firstDay | date:'yyyy-MM-dd' | date:'medium') |  date:'dd' }}
+            </div>
+              <div class="day-short">{{dayNameFirstDay | slice:0:3 }}</div>
+            </div>
+          </div>
+  
+          <div class="col-xs-12 col-md-8">
+            <div class="event-block p-3">
+              <div class="event-title ">
+                <span class="calendar_title">{{ 'HOME.CALENDAR_TITLE' | translate}} "{{examinationPeriod?.name }}" - {{ 'HOME.FIRST_DAY' | translate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xs-12 col-md-4">
+            <div class="card date-block text-center p-3" >
+              <div class="card-header month-short bg-primary text-white">{{monthNameLastDay | slice:0:3 }}</div>
+              <div class="day-number">{{ (lastDay | date:'yyyy-MM-dd' | date:'medium') |  date:'dd' }}
+            </div>
+              <div class="day-short">{{dayNameLastDay | slice:0:3 }}</div>
+            </div>
+          </div>
+  
+          <div class="col-xs-12 col-md-8">
+            <div class="event-block p-3">
+              <div class="event-title ">
+                <span class="calendar_title">{{ 'HOME.CALENDAR_TITLE' | translate}} "{{examinationPeriod?.name }}" - {{ 'HOME.LAST_DAY' | translate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card mb-3" style="max-width: 400px;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">{{ 'COMMON.LINKS' | translate}}</h3>
+        </div>
+        <div class="card-body row justify-content-center">
+          <p><a href="/subject/subject-list" class="link-primary">{{'SCHEDULE.ALL_SUBJECTS' | translate}}</a></p>
+          <p><a href="#" (click)="downloadScheduleClasses(); $event.preventDefault();" class="link-primary">{{'SCHEDULE.SCHEDULE_CLASSES' | translate}}</a></p>
+          <p><a href="#" (click)="downloadScheduleExams(); $event.preventDefault();"  class="link-primary">{{'SCHEDULE.SCHEDULE_EXAMS' | translate}}</a></p>
+          <p><a href="/schedule/questions" class="link-primary">{{'SCHEDULE.QUESTIONS' | translate}}</a></p>
+        </div>
+  </div>
+  
+

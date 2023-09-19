@@ -1,0 +1,41 @@
+<h3 class="d-flex justify-content-center" style="color: #0d6efd;">{{'SUBJECT.TITLE_LIST' | translate}}</h3>
+
+<div class="d-flex" style="padding-right: 10px;">
+  <div class="input-group " style="width: 40%; margin-left: auto;">
+    <input type="search" [(ngModel)]="keyword" name="search" placeholder="{{'COMMON.SEARCH' | translate}}" class="form-control"/>
+  </div>
+</div>
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="px-3" sortable="name" scope="col">{{ 'SUBJECT.NAME' | translate }}</th>
+        <th class="px-3" sortable="noOfESP" scope="col">{{ 'SUBJECT.NO_OF_ESP' | translate }}</th>
+        <th class="px-3" sortable="yearOfStudy" scope="col">{{ 'SUBJECT.YEAR_OF_STUDY' | translate }}</th>
+        <th class="px-3" sortable="semester" scope="col">{{ 'SUBJECT.SEMESTER' | translate }}</th>
+        <th class="px-3" scope="col">{{ 'EXAMINATION_PERIOD.TITLE' | translate }}</th>
+        <th class="px-3" scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+        <th class="px-3" scope="col">{{ 'EXAM.MARK' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subject of filteredSubjects; let i = index">
+        <td>{{ subject.name }}</td>
+        <td>{{ subject.noOfESP }}</td>
+        <td>{{ subject.yearOfStudy }}</td>
+        <td>{{ subject.semester }}</td>
+        <td>
+          {{ (marksBySubjectId[subject.id] && marksBySubjectId[subject.id].mark !== 0) ? marksBySubjectId[subject.id].exam.examinationPeriod.name : '' }}
+        </td>
+        <td>
+          {{ (marksBySubjectId[subject.id] && marksBySubjectId[subject.id].mark !== 0) ? marksBySubjectId[subject.id].exam.examDate : '' }}
+        </td>
+        <td>
+          {{ (marksBySubjectId[subject.id] && marksBySubjectId[subject.id].mark !== 0) ? marksBySubjectId[subject.id].mark : '' }}
+        </td>
+    </tbody>
+  </table>
+</div>
+
+
+

@@ -1,0 +1,70 @@
+
+<h3 class="d-flex justify-content-center" style="color: #0d6efd;">{{'STUDENT.TITLE_LIST' | translate}}</h3>
+<div class="d-flex justify-content-between mx-3">
+  <button class="btn btn-outline-primary " [routerLink]="['/student/student-form']">{{ 'COMMON.ADD' | translate }}</button>
+  <div class="input-group  my-2 my-lg-0 ml-auto">
+    <input type="search" [(ngModel)]="keyword" name="search" placeholder="{{'COMMON.SEARCH' | translate}}" class="form-control"/>
+    <div ngbDropdown class="dropdown">
+      <button ngbDropdownToggle class="btn btn-secondary" (click)="showAdvanced()" type="button" id="advancedSearchDropdown" aria-expanded="false"></button>
+      <div ngbDropdownMenu aria-labelledby="advancedSearchDropdown" class="p-2">
+        <label><input type="checkbox" [(ngModel)]="indexNumber"> Index Number</label><br>
+        <label><input type="checkbox" [(ngModel)]="indexYear"> Index Year</label><br>
+        <label><input type="checkbox" [(ngModel)]="firstName"> First Name</label><br>
+        <label><input type="checkbox" [(ngModel)]="lastName"> Last Name</label><br>
+        <label><input type="checkbox" [(ngModel)]="email"> Email</label><br>
+        <label><input type="checkbox" [(ngModel)]="address"> Address</label><br>
+        <label><input type="checkbox" [(ngModel)]="postalCode"> Postal code</label><br>
+        <label><input type="checkbox" [(ngModel)]="currentYearOfStudy"> Current Year Of Study</label><br>
+      </div>
+    </div>
+    <button type="button" (click)="search()"class="btn btn-primary">
+    <i class="fa fa-search"></i>
+  </button>
+</div>
+</div>
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="px-3" sortable="indexNumber" (sort)="onSort($event)" scope="col">{{ 'STUDENT.INDEX_NUMBER' | translate }}</th>
+        <th class="px-3" sortable="indexYear" (sort)="onSort($event)" scope="col">{{ 'STUDENT.INDEX_YEAR' | translate }}</th>
+        <th class="px-3" sortable="firstName" (sort)="onSort($event)" scope="col">{{ 'STUDENT.FIRST_NAME' | translate }}</th>
+        <th class="px-3" sortable="lastName" (sort)="onSort($event)" scope="col">{{ 'STUDENT.LAST_NAME' | translate }}</th>
+        <th class="px-3" sortable="email" (sort)="onSort($event)" scope="col">{{ 'STUDENT.EMAIL' | translate }}</th>
+        <th class="px-3" sortable="address" (sort)="onSort($event)" scope="col">{{ 'STUDENT.ADDRESS' | translate }}</th>
+        <th class="px-3" sortable="postalCode.name" (sort)="onSort($event)" scope="col">{{ 'STUDENT.POSTAL_CODE' | translate }}</th>
+        <th class="px-3" sortable="currentYearOfStudy" (sort)="onSort($event)" scope="col">{{ 'STUDENT.CURRENT_YEAR' | translate }}</th>
+        <th class="px-3" scope="col">{{ 'COMMON.ACTIONS' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students; let i = index" >
+        <td>{{student.indexNumber}}</td>
+        <td>{{student.indexYear}}</td>
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.address}}</td>
+        <td>{{student.postalCode?.name}}</td>
+        <td>{{student.currentYearOfStudy}}</td>
+        <td>
+          <button class="btn btn-outline-primary" [routerLink]="['/student/student-details', student.indexNumber, student.indexYear]">{{ 'COMMON.DETAILS' | translate }}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-center align-items-start">
+  <select class="form-select mx-2" [(ngModel)]="pageInfo.pageSize" (change)="changePageSize()">
+    <option *ngFor="let size of availablePageSizes" [ngValue]="size">{{size}}</option>
+  </select>
+  <ngb-pagination
+  [pageSize]="pageInfo.pageSize"
+  [collectionSize]="pageInfo.totalItems"
+  [(page)]="pageInfo.pageNo"
+  (pageChange)="onPageChange($event)"
+  [boundaryLinks]="true"
+  aria-label="Default pagination"></ngb-pagination>
+</div>
+

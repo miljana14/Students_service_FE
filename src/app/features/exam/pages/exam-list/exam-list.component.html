@@ -1,0 +1,57 @@
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'EXAM.TITLE_LIST' | translate}}</h3>
+<div class="d-flex justify-content-between mx-3">
+  <button *ngIf="userAuthority === 'ROLE_ADMIN'" class="btn btn-outline-primary " [routerLink]="['/exam/exam-form']">{{ 'COMMON.ADD' | translate }}</button>
+  <div class="input-group  my-2 my-lg-0 ml-auto">
+    <input type="search" [(ngModel)]="keyword" name="search" placeholder="{{'COMMON.SEARCH' | translate}}" class="form-control"/>
+    <div ngbDropdown class="dropdown">
+      <button ngbDropdownToggle class="btn btn-secondary" (click)="showAdvanced()" type="button" id="advancedSearchDropdown" aria-expanded="false"></button>
+      <div ngbDropdownMenu aria-labelledby="advancedSearchDropdown" class="p-2">
+        <label><input type="checkbox" [(ngModel)]="examinationPeriod"> Examination Period</label><br>
+        <label><input type="checkbox" [(ngModel)]="subject"> Subject</label><br>
+        <label><input type="checkbox" [(ngModel)]="professor"> Professor</label><br>
+        <label><input type="checkbox" [(ngModel)]="examDate"> Exam Date</label><br>
+      </div>
+    </div>
+    <button type="button" (click)="search()"class="btn btn-primary">
+    <i class="fa fa-search"></i>
+  </button>
+</div>
+</div>
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th sortable="examinationPeriod" (sort)="onSort($event)" scope="col">{{ 'EXAM.EXAMINATION_PERIOD' | translate }}</th>
+        <th sortable="subject" (sort)="onSort($event)" scope="col">{{ 'EXAM.SUBJECT' | translate }}</th>
+        <th sortable="professor" (sort)="onSort($event)" scope="col">{{ 'EXAM.PROFESSOR' | translate }}</th>
+        <th sortable="examDate" (sort)="onSort($event)" scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+        <th scope="col">{{ 'COMMON.ACTIONS' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of exams; let i = index" >
+        <td>{{exam.examinationPeriod.name}}</td>
+        <td>{{exam.subject.name}}</td>
+        <td>{{exam.professor.firstName }} {{exam.professor.lastName}}</td>
+        <td>{{exam.examDate}}</td>
+        <td>
+          <button class="btn btn-outline-primary" [routerLink]="['/exam/exam-details', exam.id]">{{ 'COMMON.DETAILS' | translate }}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="d-flex justify-content-center align-items-start">
+  <select class="form-select mx-2" [(ngModel)]="pageInfo.pageSize" (change)="changePageSize()">
+    <option *ngFor="let size of availablePageSizes" [ngValue]="size">{{size}}</option>
+  </select>
+  <ngb-pagination
+  [pageSize]="pageInfo.pageSize"
+  [collectionSize]="pageInfo.totalItems"
+  [(page)]="pageInfo.pageNo"
+  (pageChange)="onPageChange($event)"
+  [boundaryLinks]="true"
+  aria-label="Default pagination"></ngb-pagination>
+</div>

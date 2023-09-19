@@ -1,0 +1,52 @@
+<h3 class="d-flex justify-content-center" style="color: #0d6efd;">{{'EXAM.TITLE_DETAILS' | translate}}</h3>
+
+
+<form class="m-3" [formGroup]="examForm" *ngIf="examForm">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'EXAM.EXAMINATION_PERIOD' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="examinationPeriod"
+      />
+    </div>
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'EXAM.SUBJECT' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="subject"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'EXAM.PROFESSOR' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="professor"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'EXAM.EXAM_DATE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="examDate"
+      />
+    </div>
+    <div *ngIf="userAuthority === 'ROLE_ADMIN'" class="d-flex justify-content-end mt-2">
+
+      <button class="mx-1 btn btn-outline-primary" [routerLink]="['../../exam-form',id]">{{ 'COMMON.EDIT' | translate }}</button>
+      <button type="button" class=" mx-1 btn btn-outline-danger" (click)="onDelete()">{{ 'COMMON.DELETE' | translate }}</button>
+    </div>
+
+  </div>
+  </div>
+
+</form>

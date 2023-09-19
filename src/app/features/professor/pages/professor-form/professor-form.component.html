@@ -1,0 +1,156 @@
+<form [formGroup]="professorForm" *ngIf="professorForm" (ngSubmit)="onSave()">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+      <div class="from-group">
+        <label for="firstName">{{'PROFESSOR.FIRST_NAME' | translate }}</label>
+        <input id="firstName" class="form-control" placeholder="{{'PROFESSOR.FIRST_NAME' | translate }}"  type="text" formControlName="firstName" />
+        <div class="alert alert-danger" *ngIf="hasErrors('firstName')">
+          <span *ngIf="hasErrors('firstName','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('firstName','minlength')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MIN_LENGTH' | translate: {minlength:professorForm.get('firstName')?.errors!['minlength']['minlength']}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="lastName">{{'PROFESSOR.LAST_NAME' | translate }}</label>
+        <input id="lastName" class="form-control" placeholder="{{'PROFESSOR.LAST_NAME' | translate }}"  type="text" formControlName="lastName" />
+        <div class="alert alert-danger" *ngIf="hasErrors('lastName')">
+          <span *ngIf="hasErrors('lastName','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('lastName','minlength')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MIN_LENGTH' | translate: {minlength:professorForm.get('lastName')?.errors!['minlength']['minlength']}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="email">{{'PROFESSOR.EMAIL' | translate }}</label>
+        <input id="email" class="form-control" placeholder="{{'PROFESSOR.EMAIL' | translate }}"  type="text" formControlName="email"/>
+        <div class="alert alert-danger" *ngIf="hasErrors('email')">
+          <span *ngIf="hasErrors('email','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('email','email')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.EMAIL' | translate: {email:professorForm.get('email')?.errors!['email']['email']}  }}</small>
+          </span>
+          <span *ngIf="hasErrors('email','invalidCredentials')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.EXISTS_EMAIL' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="address">{{'PROFESSOR.ADDRESS' | translate }}</label>
+        <input id="address" class="form-control" placeholder="{{'PROFESSOR.ADDRESS' | translate }}"  type="text" formControlName="address" />
+        <div class="alert alert-danger" *ngIf="hasErrors('address')">
+          <span *ngIf="hasErrors('address','minlength')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MIN_LENGTH' | translate: {minlength:professorForm.get('address')?.errors!['minlength']['minlength']}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group" formGroupName="postalCode">
+        <label for="postalCode">{{ 'STUDENT.CITY' | translate }}</label>
+        <select 
+          type="text"
+          id="postalCode" class="form-select"
+          formControlName="postalCode"
+        >
+          <option *ngFor="let city of cities" [ngValue]="city.postalCode">
+            {{ city.postalCode }} - {{ city.name }}
+          </option>
+        </select>
+        <div class="alert alert-danger" *ngIf="hasErrors('city')">
+          <small>{{ 'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate }}</small>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="phone">{{'PROFESSOR.PHONE' | translate }}</label>
+        <input id="phone" class="form-control" placeholder="{{'PROFESSOR.PHONE' | translate }}"  type="text" formControlName="phone" />
+        <div class="alert alert-danger" *ngIf="hasErrors('phone')">
+          <span *ngIf="hasErrors('phone','minlength')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.MIN_LENGTH' | translate: {minlength:professorForm.get('phone')?.errors!['minlength']['minlength']}  }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group">
+        <label for="reelectionDate">{{'PROFESSOR.REELECTION_DATE' | translate }}</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="{{ 'PROFESSOR.REELECTION_DATE' | translate }}" formControlName="reelectionDate" ngbDatepicker #dp="ngbDatepicker">
+            <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+        <div class="alert alert-danger" *ngIf="hasErrors('reelectionDate')">
+          <span *ngIf="hasErrors('reelectionDate','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+      
+      <div class="form-group" formGroupName="title">
+        <label for="title">{{ 'PROFESSOR.PROFESSOR_TITLE' | translate }}</label>
+        <select type="text" id="title" class="form-select" formControlName="id">
+          <option *ngFor="let title of titles " [ngValue]="title.id" >
+          {{ title.title }}
+          </option>
+        </select>
+        <div class="alert alert-danger" *ngIf="hasErrors('title')">
+          <span *ngIf="hasErrors('title','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group" *ngIf="!professorExists">
+        <label for="username">{{'STUDENT.USERNAME' | translate }}</label>
+        <input id="username" class="form-control" placeholder="{{'STUDENT.USERNAME' | translate }}"  type="text" formControlName="username"/>
+        <div class="alert alert-danger" *ngIf="hasErrors('username')">
+          <span *ngIf="hasErrors('username','invalidCredentials')">
+            <small>{{'COMMON.VALIDATION_MESSAGES.EXISTS_USERNAME' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group" *ngIf="!professorExists">
+        <label for="password">{{'STUDENT.PASSWORD' | translate }}</label>
+        <input id="password" class="form-control" placeholder="{{'STUDENT.PASSWORD' | translate }}"  type="password" formControlName="password" />
+        <div class="alert alert-danger" *ngIf="hasErrors('password')">
+          <span *ngIf="hasErrors('password','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="from-group" *ngIf="!professorExists">
+        <label for="repeatedPassword">{{'STUDENT.REPEATED_PASSWORD' | translate }}</label>
+        <input id="repeatedPassword" class="form-control" placeholder="{{'STUDENT.REPEATED_PASSWORD' | translate }}"  type="password" formControlName="repeatedPassword" />
+        <div class="alert alert-danger" *ngIf="hasErrors('repeatedPassword')">
+          <span *ngIf="hasErrors('repeatedPassword','required')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+          </span>
+          <span *ngIf="hasErrors('repeatedPassword', 'fieldsMismatch')" >
+            <small>{{'COMMON.VALIDATION_MESSAGES.PASSWORD_MISMATCH' | translate}}</small>
+          </span>
+        </div>
+      </div>
+
+
+      <div class="d-flex justify-content-end mt-2">
+        <button type="button" class="mx-1 btn btn-outline-primary" (click)="onSave()">{{'COMMON.SAVE' | translate }}</button>
+        <button class="mx-1 btn btn-outline-danger" [routerLink]="['../professor-list']" queryParamsHandling="preserve" >{{'COMMON.CANCEL' | translate }}</button>
+      </div>
+    </div>
+
+
+    </div>
+
+</form>
+
+

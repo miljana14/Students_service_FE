@@ -1,0 +1,178 @@
+{
+  "APP_TITLE": "Student service",
+  "LOGIN":{
+    "LOGIN": "Login",
+    "USERNAME": "Username",
+    "PASSWORD": "Password"
+  },
+  "LOGOUT": "Logout",
+  "SETTINGS": "Settings",
+  "CHANGE_PASSWORD": {
+    "CHANGE_PASSWORD": "Change password",
+    "REPEATED_PASSWORD": "Repeated password",
+    "PASSWORDS_NOT_SAME": "Passwords do not match"
+  },
+  "COMMON": {
+    "ACTIONS" : "Actions",
+    "TIME_DAY": "Day and time",
+    "CHECK": "Check",
+    "ADD": "Add",
+    "EDIT": "Edit",
+    "EDIT_PROFILE": "Edit profile",
+    "SEARCH": "Search",
+    "UPDATE_CONFIRM_DIALOG": {
+      "TITLE": "Updating {{entityName}}",
+      "MESSAGE": "Are you sure you want to update {{entityName}} <strong>{{objectDetails}}</strong>?"
+    },
+    "CLONE_CONFIRM_DIALOG": {
+      "TITLE": "Clonning {{entityName}}",
+      "MESSAGE": "Are you sure you want to clone {{entityName}} <strong>{{objectDetails}}</strong>?"
+    },
+    "EXAMINATION_NAME": "Choose name of examination period which you want to clone",
+    "DETAILS": "Details",
+    "CANCEL" : "Cancel",
+    "CONFIRM": "Confirm",
+    "SAVE": "Save",
+    "CLONE": "Clone",
+    "DELETE": "Delete",
+    "ENROLL_EXAMS":"Enroll exams",
+    "STUDENTS":"Students",
+    "INSERT_MARK":"Insert mark",
+    "DELETE_CONFIRM_DIALOG": {
+      "TITLE": "Deleting {{entityName}}",
+      "MESSAGE": "Are you sure you want to delete {{entityName}} <strong>{{objectDetails}}</strong>?"
+    },
+    "VALIDATION_MESSAGES":{
+      "REQUIRED" : "This field is requred!",
+      "MIN_LENGTH": "It`s too short",
+      "MAX_LENGTH": "It`s too long",
+      "MIN": "Min value is 1",
+      "MAX": "Max value is 5",
+      "MIN_INDEX": "Min value is 2000",
+      "MAX_INDEX": "Max value is 2100",
+      "EMAIL": "Email must contain @",
+      "MIN_YEAR":"Min value is 1",
+      "MAX_YEAR":"Max value is 5",
+      "PASSWORD_MISMATCH":"Passwords must be same",
+      "EXAM_EXISTS":"Exam already exists",
+      "ERROR_USERNAME":"Wrong username",
+      "ERROR_PASSWORD":"Wrong password",
+      "EXISTS_EMAIL":"Email already exists",
+      "EXISTS_USERNAME":"Username already exists",
+      "UNIQUE_NAME":"Name must be unique",
+      "OVERLAP":"Examination period dates overlap with existing period",
+      "BEGIN_BEFORE_END_DATE":"Begin date must be before end date"
+
+    },
+    "EVENTS":"Events",
+    "LINKS":"Links"
+  },
+  "STUDENT": {
+    "TITLE": "Student",
+    "TITLE_PLURAL": "Students",
+    "TITLE_LIST": "Student list",
+    "TITLE_DETAILS": "Details for student",
+    "TITLE_EDIT": "Edit student",
+    "TITLE_ADD": "Add new student",
+    "INDEX_NUMBER": "Index number",
+    "INDEX_YEAR" : "Index year",
+    "FIRST_NAME" : "First name",
+    "LAST_NAME" : "Last name",
+    "EMAIL" : "Email",
+    "ADDRESS" : "Address",
+    "POSTAL_CODE" : "Postal code",
+    "CITY" : "City",
+    "CURRENT_YEAR" : "Current year of study",
+    "USERNAME" : "Username",
+    "PASSWORD" : "Password",
+    "REPEATED_PASSWORD": "Repeated password",
+    "CHOOSE": "Choose subject:"
+  },
+  "HOME":{
+    "TITLE": "Home",
+    "MY_PROFILE": "My profile",
+    "OTHER_TITLE": "Welcome to Student`s service",
+    "CALENDAR_TITLE": "Exam application for examination period",
+    "FIRST_DAY": "first day",
+    "LAST_DAY": "last day"
+  },
+  "SUBJECT": {
+    "TITLE": "Subject",
+    "TITLE_PLURAL": "Subjects",
+    "TITLE_LIST": "Subject list",
+    "TITLE_DETAILS": "Details for subject",
+    "TITLE_EDIT": "Edit subject",
+    "TITLE_ADD": "Add new subject",
+    "ID": "Id",
+    "NAME" : "Name",
+    "DESCRIPTION" : "Description",
+    "NO_OF_ESP" : "No. of ESP",
+    "YEAR_OF_STUDY" : "Year of study",
+    "SEMESTER" : "Semester"
+  },
+  "PROFESSOR": {
+    "TITLE": "Professor",
+    "TITLE_PLURAL": "Professors",
+    "TITLE_LIST": "Professor list",
+    "TITLE_DETAILS": "Details for professor",
+    "TITLE_EDIT": "Edit professor",
+    "TITLE_ADD": "Add new professor",
+    "ID": "Id",
+    "FIRST_NAME" : "First name",
+    "LAST_NAME" : "Last name",
+    "EMAIL" : "Email",
+    "ADDRESS" : "Address",
+    "POSTAL_CODE" : "City",
+    "PHONE" : "Phone",
+    "REELECTION_DATE": "Reelection date",
+    "PROFESSOR_TITLE": "Title",
+    "SUBJECTS": "Subjects",
+    "ADD_SUBJECTS": "Add subjects"
+  },
+  "EXAMINATION_PERIOD": {
+    "TITLE": "Examination period",
+    "TITLE_PLURAL": "Examination periods",
+    "TITLE_LIST": "Examination period list",
+    "TITLE_DETAILS": "Details for examination period",
+    "TITLE_ADD": "Add new examination period",
+    "ID": "Id",
+    "NAME" : "Name",
+    "PAST_NAME": "Past examination period",
+    "BEGIN_DATE" : "Begin date",
+    "END_DATE" : "End date",
+    "ACTIVE" : "Active",
+    "ACTIVE_TITLE":"Active examination period",
+    "NO_ACTIVE":"No active examination period",
+    "CURRENT_DATE":"Current date",
+    "BEST_EXAM":"Student`s best exam",
+    "AVERAGE_MARK":"Average mark"
+  },
+  "EXAM": {
+    "TITLE": "Exam",
+    "TITLE_PLURAL": "Exams",
+    "TITLE_LIST": "Exam list",
+    "TITLE_AVAILABLE_EXAMS": "Available exams for application",
+    "TITLE_DETAILS": "Details for exam",
+    "TITLE_EDIT": "Edit exam",
+    "TITLE_ADD": "Add new exam",
+    "EXAMINATION_PERIOD": "Examination period",
+    "SUBJECT" : "Subject",
+    "PROFESSOR" : "Professor",
+    "EXAM_DATE" : "Exam date",
+    "AVAILABLE_EXAMS":"Exam application",
+    "APPLY": "Apply",
+    "EXAMS":"Exams",
+    "MARK":"Mark",
+    "PROFESSOR_EXAMS":"Professor exams",
+    "GAVE_UP":"Gave up"
+  },
+  "MARK":{
+    "ADD_MARKS":"Add Marks"
+  },
+  "SCHEDULE":{
+    "SCHEDULE_CLASSES" : "Schedule Classes",
+    "SCHEDULE_EXAMS" : "Schedule Exams",
+    "QUESTIONS" : "Most common questions",
+    "ALL_SUBJECTS":"Review of all subjects"
+  }
+}

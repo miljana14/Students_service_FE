@@ -1,0 +1,106 @@
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'STUDENT.TITLE_DETAILS' | translate}}</h3>
+
+
+<form class="m-3" [formGroup]="studentForm" *ngIf="studentForm">
+  <div class="row justify-content-center">
+
+    <div class="col-md-8 col-lg-6">
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.INDEX_NUMBER' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="indexNumber"
+      />
+    </div>
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.INDEX_YEAR' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="indexYear"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.FIRST_NAME' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="firstName"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.LAST_NAME' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="lastName"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.EMAIL' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="email"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.ADDRESS' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="address"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.POSTAL_CODE' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="postalCode"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.CURRENT_YEAR' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="currentYear"
+      />
+    </div>
+
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.USERNAME' | translate }}</span>
+      <input
+        type="text" readonly
+        class="form-control"
+        formControlName="username"
+      />
+    </div>
+    <div class="mb-3 d-flex flex-column">
+      <span class="badge bg-primary">{{ 'STUDENT.PASSWORD' | translate }}</span>
+      <input
+        type="password" readonly
+        class="form-control"
+        formControlName="password"
+      />
+    </div>
+    
+    <div *ngIf="userAuthority === 'ROLE_ADMIN'" class="d-flex justify-content-end mt-2">
+      <button class="mx-1 btn btn-outline-primary" [routerLink]="['../../../student-form',indexNumber, indexYear]">{{ 'COMMON.EDIT' | translate }}</button>
+      <button type="button" class=" mx-1 btn btn-outline-danger" (click)="onDelete()">{{ 'COMMON.DELETE' | translate }}</button>
+      <button class="mx-1 btn btn-outline-primary" [routerLink]="['../../../change-student-password',indexNumber, indexYear]">{{ 'CHANGE_PASSWORD.CHANGE_PASSWORD' | translate }}</button>
+
+    </div>
+  </div>
+  </div>
+
+</form>

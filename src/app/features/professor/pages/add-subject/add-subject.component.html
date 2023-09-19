@@ -1,0 +1,20 @@
+<form *ngIf="subjectForm" [formGroup]="subjectForm">
+
+  <div class="from-group">
+    <label for="title">{{'PROFESSOR.SUBJECTS' | translate }}</label>
+    <select
+      type="text"
+      formControlName="selectedSubjects"
+      class="form-select" multiple
+    >
+    <option *ngFor="let subject of subjects" [ngValue]="subject">
+      <p class="form-control p">{{ subject.name }}</p>
+    </option>
+    </select>
+    <br>
+    <button class="btn btn-primary" (click)="onSave()">Add</button>
+
+</div>
+<br>
+</form>
+

@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm" *ngIf="loginForm" (ngSubmit)="onLogin()">
+  <div class="mx-auto col-lg-6 col-md-8 mt-3 p-4 border border-primary rounded">
+    <h2>{{'LOGIN.LOGIN' | translate }}</h2>
+
+    <div class="form-group">
+      <label for="username">{{'LOGIN.USERNAME' | translate }}</label>
+      <input type="text" id="username" class="form-control" formControlName="username" />
+      <div class="alert alert-danger" *ngIf="hasErrors('username')">
+        <span *ngIf="hasErrors('username','required')" >
+          <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+        </span>
+        <span *ngIf="hasErrors('username','invalidCredentials')">{{'COMMON.VALIDATION_MESSAGES.ERROR_USERNAME' | translate}}</span>
+      </div>
+      
+    </div>
+
+    <div class="form-group">
+      <label for="password">{{'LOGIN.PASSWORD' | translate }}</label>
+      <input type="password" id="password" class="form-control" formControlName="password" />
+      <div class="alert alert-danger" *ngIf="hasErrors('password')">
+        <span *ngIf="hasErrors('password','required')" >
+          <small>{{'COMMON.VALIDATION_MESSAGES.REQUIRED' | translate}}</small>
+        </span>
+        <span *ngIf="hasErrors('password','invalidCredentialsPassword')">{{'COMMON.VALIDATION_MESSAGES.ERROR_PASSWORD' | translate}}</span>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row-reverse mt-2">
+      <button type="submit" class="btn btn-outline-primary">{{'LOGIN.LOGIN' | translate }}</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'EXAM.PROFESSOR_EXAMS' | translate}}</h3>
+
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'EXAM.EXAMINATION_PERIOD' | translate }}</th>
+        <th scope="col">{{ 'EXAM.SUBJECT' | translate }}</th>
+        <th scope="col">{{ 'EXAM.EXAM_DATE' | translate }}</th>
+        <th scope="col">{{ 'COMMON.ACTIONS' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of exams; let i = index" >
+        <td>{{exam.examinationPeriod.name}}</td>
+        <td>{{exam.subject.name}}</td>
+        <td>{{exam.examDate}}</td>
+        <td>
+          <button type="button" class="mx-1 btn btn-outline-primary" [routerLink]="['../student-examapplication-list', exam.id]">{{ 'COMMON.STUDENTS' | translate }}</button>
+        </td>
+      </tr>
+
+    </tbody>
+    
+  </table>
+</div>
+

@@ -1,0 +1,70 @@
+<h3  class="d-flex justify-content-center" style="color: #0d6efd;">{{'PROFESSOR.TITLE_LIST' | translate}}</h3>
+<div class="d-flex justify-content-between mx-3">
+  <button *ngIf="userAuthority === 'ROLE_ADMIN'" class="btn btn-outline-primary " [routerLink]="['/professor/professor-form']">{{ 'COMMON.ADD' | translate }}</button>
+  <div class="input-group  my-2 my-lg-0 ml-auto">
+    <input type="search" [(ngModel)]="keyword" name="search" placeholder="{{'COMMON.SEARCH' | translate}}" class="form-control"/>
+    <div ngbDropdown class="dropdown">
+      <button ngbDropdownToggle class="btn btn-secondary" (click)="showAdvanced()" type="button" id="advancedSearchDropdown" aria-expanded="false"></button>
+      <div ngbDropdownMenu aria-labelledby="advancedSearchDropdown" class="p-2">
+        <label><input type="checkbox" [(ngModel)]="firstName"> First Name</label><br>
+        <label><input type="checkbox" [(ngModel)]="lastName"> Last Name</label><br>
+        <label><input type="checkbox" [(ngModel)]="email"> Email</label><br>
+        <label><input type="checkbox" [(ngModel)]="address"> Address</label><br>
+        <label><input type="checkbox" [(ngModel)]="postalCode"> City</label><br>
+        <label><input type="checkbox" [(ngModel)]="phone"> Phone</label><br>
+        <label><input type="checkbox" [(ngModel)]="reelectionDate"> Reelection Date</label><br>
+        <label><input type="checkbox" [(ngModel)]="title"> Title</label><br>
+      </div>
+    </div>
+    <button type="button" (click)="search()"class="btn btn-primary">
+    <i class="fa fa-search"></i>
+  </button>
+</div>
+</div>
+<div class="table-responsive mx-2">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="px-3" sortable="firstName" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.FIRST_NAME' | translate }}</th>
+        <th class="px-3" sortable="lastName" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.LAST_NAME' | translate }}</th>
+        <th class="px-3" sortable="email" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.EMAIL' | translate }}</th>
+        <th class="px-3" sortable="address" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.ADDRESS' | translate }}</th>
+        <th class="px-3" sortable="postalCode.name" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.POSTAL_CODE' | translate }}</th>
+        <th class="px-3" sortable="phone" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.PHONE' | translate }}</th>
+        <th class="px-3" sortable="reelectionDate" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.REELECTION_DATE' | translate }}</th>
+        <th class="px-3" sortable="title" (sort)="onSort($event)" scope="col">{{ 'PROFESSOR.PROFESSOR_TITLE' | translate }}</th>
+        <th class="px-3" scope="col">{{ 'COMMON.ACTIONS' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let professor of professors; let i = index" >
+        <td>{{professor.firstName}}</td>
+        <td>{{professor.lastName}}</td>
+        <td>{{professor.email}}</td>
+        <td>{{professor.address}}</td>
+        <td>{{professor.postalCode?.name}}</td>
+        <td>{{professor.phone}}</td>
+        <td>{{professor.reelectionDate}}</td>
+        <td>{{professor.title.title}}</td>
+        <td>
+          <button class="btn btn-outline-primary" [routerLink]="['/professor/professor-details', professor.id]">{{ 'COMMON.DETAILS' | translate }}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-center align-items-start">
+  <select class="form-select mx-2" [(ngModel)]="pageInfo.pageSize" (change)="changePageSize()">
+    <option *ngFor="let size of availablePageSizes" [ngValue]="size">{{size}}</option>
+  </select>
+  <ngb-pagination
+  [pageSize]="pageInfo.pageSize"
+  [collectionSize]="pageInfo.totalItems"
+  [(page)]="pageInfo.pageNo"
+  (pageChange)="onPageChange($event)"
+  [boundaryLinks]="true"
+  aria-label="Default pagination"></ngb-pagination>
+</div>
+
+
